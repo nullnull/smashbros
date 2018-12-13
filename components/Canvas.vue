@@ -5,13 +5,16 @@
       :config="{
         width: width,
         height: height,
-    }">
-      <v-layer ref="layer">
+      }"
+      @click="saveAsImage">
+      <v-layer
+        ref="layer"
+      >
         <v-image
           :config="{
             image: backgroundImageUrl,
             width: width,
-            height: height,
+            height: height
           }"
         />
       </v-layer>
@@ -19,7 +22,8 @@
         <v-image
           :config="{
             draggable: true,
-            image: charaImageUrl
+            image: charaImage,
+            scale: { x: size, y : size }
           }"
         />
       </v-layer>
@@ -27,12 +31,12 @@
         ref="layer">
         <v-text
           :config="{
-            text: 'ヒメ',
-            fontSize: 100,
+            text: name,
+            fontSize: fontSize,
             fontFamily: 'source-han-sans-japanese',
             fontWeight: 900,
-            x: 300,
-            y: 77,
+            x: width / 3,
+            y: height / 30,
             draggable: true,
             stroke: '#050505',
             strokeWidth: 4,
@@ -42,10 +46,11 @@
         />
       </v-layer>
     </v-stage>
-    <div>
-      ヒメ
-    </div>
-    <img id="image_png">
+    <button
+      class="uk-button uk-button-primary"
+      @click="saveAsImage">
+      画像を保存
+    </button>
   </div>
 </template>
 
@@ -58,12 +63,29 @@ export default {
       type: Number,
       required: true
     },
-    aspectRatio: {
+    height: {
       type: Number,
       required: true
     },
     backgroundImage: {
       type: String,
+      required: true
+    },
+    charaImage: {
+      type: HTMLImageElement,
+      required: false,
+      default: null
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    size: {
+      type: Number,
+      required: true
+    },
+    fontSize: {
+      type: Number,
       required: true
     }
   },
@@ -73,12 +95,7 @@ export default {
       backgroundImageUrl: null
     }
   },
-  computed: {
-    height() {
-      return this.width * this.aspectRatio
-    }
-  },
-  created() {
+  mounted() {
     if (process.browser) {
       const backgroundImage = new Image()
       backgroundImage.src = this.backgroundImage
@@ -96,17 +113,21 @@ export default {
   },
   methods: {
     saveAsImage(e) {
-      const stage = e.target.getStage()
-      document.getElementById('image_png').src = stage.toDataURL()
+      const stage = this.$refs.stage.getStage()
+      this.downloadURI(stage.toDataURL(), 'smashbros.png')
+    },
+    downloadURI(uri, name) {
+      const link = document.createElement('a')
+      link.download = name
+      link.href = uri
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      // delete link;
     }
   }
 }
 </script>
 
 <style>
-#root {
-  color: red;
-  font-family: 'source-han-sans-japanese';
-  font-size: 90px;
-}
 </style>
