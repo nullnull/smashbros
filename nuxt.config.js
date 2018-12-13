@@ -29,7 +29,10 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [{ src: '@/plugins/uikit', ssr: false }],
+  plugins: [
+    { src: '@/plugins/uikit', ssr: false },
+    { src: '@/plugins/konva', ssr: true }
+  ],
 
   /*
   ** Nuxt.js modules
