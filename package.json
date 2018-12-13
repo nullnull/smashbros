@@ -14,12 +14,14 @@
   },
   "dependencies": {
     "cross-env": "^5.2.0",
+    "konva": "^2.5.1",
     "node-sass": "^4.11.0",
     "nuxt": "^2.0.0",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
     "sass-resources-loader": "^2.0.0",
-    "uikit": "^3.0.0-rc.25"
+    "uikit": "^3.0.0-rc.25",
+    "vue-konva": "^2.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
