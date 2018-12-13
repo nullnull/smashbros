@@ -63,7 +63,7 @@ export default {
       required: true
     },
     backgroundImage: {
-      type: Object,
+      type: String,
       required: true
     }
   },
