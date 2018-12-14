@@ -46,11 +46,11 @@
         />
       </v-layer>
     </v-stage>
-    <button
+    <!-- <button
       class="uk-button uk-button-primary"
       @click="saveAsImage">
       画像を保存
-    </button>
+    </button> -->
   </div>
 </template>
 
@@ -130,4 +130,7 @@ export default {
 </script>
 
 <style>
+#settings-name {
+  margin-top: 4px;
+}
 </style>

@@ -1,29 +1,9 @@
 <template lang="pug">
   #root
-    h1
+    h1.uk-padding.uk-text-center.uk-padding-remove-left.uk-padding-remove-right
       | スマブラ参戦風
       br
       | 画像ジェネレーター
-
-    .uk-margin
-      .uk-form-custom
-          input(type="file" @change="onFileChanged" accept="image/*" multiple)
-          button.uk-button.uk-button-default(type=button)
-            span(uk-icon="icon: cloud-upload")
-            | 画像を選択
-
-    .uk-margin
-      label.uk-form-label(for="settings-name")
-        | 参戦者名
-      input#settings-name.uk-input(type="text" placeholder="(例) キングクルール" v-model="name")
-    .uk-margin
-      label.uk-form-label(for="settings-image-size")
-        | 画像サイズ
-      input#settings-image-size.uk-range(type="range" min="0" max="2" step="0.001" v-model="size")
-    .uk-margin
-      label.uk-form-label(for="settings-font-size")
-        | 文字サイズ
-      input#settings-font-size.uk-range(type="range" min="40" max="120" step="5" v-model="fontSize")
 
     Canvas(
       v-if="isCanvasVisible"
@@ -35,6 +15,38 @@
       :size="parseFloat(size)"
       :font-size="parseInt(fontSize)"
     )
+
+    form.settings.uk-padding-small.uk-margin-top
+      .uk-grid.uk-grid-small(uk-grid)
+        .uk-form-custom.uk-text-center.uk-width-1-3
+            input(type="file" @change="onFileChanged" accept="image/*" multiple)
+            span.plus-circle(uk-icon="icon: plus-circle; ratio: 2.8")
+            br
+            label.uk-form-label
+              | 画像を選択
+        .uk-width-2-3
+          label.uk-form-label(for="settings-name")
+            | 参戦者名
+          input#settings-name.uk-input(type="text" placeholder="(例) キングクルール" v-model="name")
+        div.uk-margin-small-top
+        .uk-margin-small.uk-width-1-1
+          .uk-grid.uk-grid-small(uk-grid)
+            .uk-width-1-4
+              label.uk-form-label(for="settings-image-size")
+                | 画像サイズ
+            .uk-width-3-4
+              input#settings-image-size.uk-range(type="range" min="0" max="2" step="0.001" v-model="size")
+        .uk-margin-small.uk-width-1-1
+          .uk-grid.uk-grid-small(uk-grid)
+            .uk-width-1-4
+              label.uk-form-label(for="settings-font-size")
+                | 文字サイズ
+            .uk-width-3-4
+              input#settings-font-size.uk-range(type="range" min="40" max="120" step="5" v-model="fontSize")
+        .uk-width-1-1.uk-text-center
+          button.uk-button
+            span(uk-icon="icon: download; ratio: 1.5")
+            | 画像を保存
 </template>
 
 <script>
@@ -124,8 +136,4 @@ export default {
 </script>
 
 <style>
-h1 {
-  color: #040404;
-  font-family: 'source-han-sans-japanese' !important;
-}
 </style>
