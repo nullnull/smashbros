@@ -114,8 +114,11 @@ export default {
   },
   methods: {
     saveAsImage(e) {
-      const stage = this.$refs.stage.getStage()
-      this.downloadURI(stage.toDataURL(), 'smashbros.png')
+      const url = this.$refs.stage.getStage().toDataURL()
+      document.getElementById('output-image').src = url
+      if (!this.isSp()) {
+        this.downloadURI(url, 'smashbros.png')
+      }
     },
     downloadURI(uri, name) {
       const link = document.createElement('a')
