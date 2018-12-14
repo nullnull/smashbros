@@ -115,8 +115,18 @@ export default {
     }
   },
   methods: {
+    resizeCanvas(scale) {
+      const stage = this.$refs.stage.getStage()
+      stage.width(this.width * scale)
+      stage.height(this.height * scale)
+      stage.scale({ x: scale, y: scale })
+      stage.draw()
+    },
     saveAsImage(e) {
+      this.resizeCanvas(3) // To enable download high resolution image
       const url = this.$refs.stage.getStage().toDataURL()
+      this.resizeCanvas(1)
+
       document.getElementById('output-image').src = url
       if (!this.isSp()) {
         this.downloadURI(url, 'smashbros.png')
@@ -136,18 +146,6 @@ export default {
 </script>
 
 <style>
-#root {
-  width: 100%;
-}
-canvas {
-  height: calc(100vw * 0.5661) !important;
-  max-height: calc(600px * 0.5661) !important;
-}
-.konvajs-content {
-  width: 100% !important;
-  height: calc(100vw * 0.5661) !important;
-  max-height: calc(600px * 0.5661) !important;
-}
 #settings-name {
   margin-top: 4px;
 }

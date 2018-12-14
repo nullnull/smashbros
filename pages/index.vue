@@ -73,8 +73,7 @@ export default {
     Canvas
   },
   data() {
-    // const canvasWidth = Math.min(600, window.innerWidth)
-    const canvasWidth = 1200
+    const canvasWidth = Math.min(600, window.innerWidth)
     return {
       backgroundImage: backgroundImage,
       canvasWidth: canvasWidth,
