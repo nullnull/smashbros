@@ -37,14 +37,14 @@
               label.uk-form-label(for="settings-image-size")
                 | 画像サイズ
             .uk-width-3-4
-              input#settings-image-size.uk-range(type="range" min="0" max="2" step="0.001" v-model="size")
+              input#settings-image-size.uk-range(type="range" min="0" max="1.5" step="0.001" v-model="size")
         .uk-margin-small.uk-width-1-1
           .uk-grid.uk-grid-small(uk-grid)
             .uk-width-1-4
               label.uk-form-label(for="settings-font-size")
                 | 文字サイズ
             .uk-width-3-4
-              input#settings-font-size.uk-range(type="range" min="80" max="400" step="5" v-model="fontSize")
+              input#settings-font-size.uk-range(type="range" min="40" max="300" step="5" v-model="fontSize")
         .uk-width-1-1.uk-text-center
           span.uk-button(@click="saveAsImage" uk-toggle="target: #modal")
             span(uk-icon="icon: download; ratio: 1.5")
@@ -81,7 +81,7 @@ export default {
       eventHub: new Vue(),
       name: '',
       size: 1,
-      fontSize: 140 + canvasWidth / 300,
+      fontSize: this.isSp() ? 90 : 140,
       image: null,
       isCanvasVisible: false
     }
