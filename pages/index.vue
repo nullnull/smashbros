@@ -5,17 +5,18 @@
       br
       | 画像ジェネレーター
 
-    Canvas(
-      v-if="isCanvasVisible"
-      :width="canvasWidth"
-      :height="canvasHeight"
-      :background-image="backgroundImage"
-      :chara-image="image"
-      :name="name"
-      :size="parseFloat(size)"
-      :font-size="parseInt(fontSize)"
-      :event-hub="eventHub"
-    )
+    .uk-flex.uk-flex-center
+      Canvas(
+        v-if="isCanvasVisible"
+        :width="canvasWidth"
+        :height="canvasHeight"
+        :background-image="backgroundImage"
+        :chara-image="image"
+        :name="name"
+        :size="parseFloat(size)"
+        :font-size="parseInt(fontSize)"
+        :event-hub="eventHub"
+      )
 
     form.settings.uk-padding-small.uk-margin-top
       .uk-grid.uk-grid-small(uk-grid)
@@ -155,5 +156,9 @@ export default {
 <style>
 .modal-text {
   color: #030303;
+}
+#root {
+  max-width: 600px;
+  margin: auto;
 }
 </style>
