@@ -1,0 +1,24 @@
+import Vue from 'vue'
+
+Vue.mixin({
+  methods: {
+    $imageOnLoad(src, func) {
+      const img = new Image()
+      img.onload = () => {
+        func()
+      }
+      img.src = src
+    },
+    $delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms))
+    },
+    isSp() {
+      if (process.browser) {
+        const widthOfSmartPhone = 730
+        return window.innerWidth < widthOfSmartPhone
+      } else {
+        return false
+      }
+    }
+  }
+})

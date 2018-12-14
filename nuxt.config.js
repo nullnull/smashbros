@@ -25,6 +25,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '@/plugins/mixin',
     { src: '@/plugins/uikit', ssr: false },
     { src: '@/plugins/konva', ssr: false }
   ],
