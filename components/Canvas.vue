@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import CharaImage from '~/assets/images/hime.png'
 import Vue from 'vue'
 
 export default {
@@ -106,11 +105,6 @@ export default {
         this.backgroundImageUrl = backgroundImage
       }
 
-      const charaImage = new Image()
-      charaImage.src = CharaImage
-      charaImage.onload = () => {
-        this.charaImageUrl = charaImage
-      }
       this.eventHub.$on('saveAsImage', this.saveAsImage)
     }
   },
