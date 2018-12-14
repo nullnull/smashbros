@@ -14,6 +14,7 @@
       :name="name"
       :size="parseFloat(size)"
       :font-size="parseInt(fontSize)"
+      :event-hub="eventHub"
     )
 
     form.settings.uk-padding-small.uk-margin-top
@@ -44,7 +45,7 @@
             .uk-width-3-4
               input#settings-font-size.uk-range(type="range" min="40" max="120" step="5" v-model="fontSize")
         .uk-width-1-1.uk-text-center
-          button.uk-button
+          span.uk-button(@click="saveAsImage")
             span(uk-icon="icon: download; ratio: 1.5")
             | 画像を保存
 </template>
@@ -53,6 +54,7 @@
 import Canvas from '~/components/Canvas'
 import backgroundImage from '~/assets/images/sansen2.jpeg'
 import UIkit from 'uikit'
+import Vue from 'vue'
 
 export default {
   components: {
@@ -64,6 +66,7 @@ export default {
       backgroundImage: backgroundImage,
       canvasWidth: canvasWidth,
       canvasAspectRatio: 0.5661,
+      eventHub: new Vue(),
       name: '',
       size: 1,
       fontSize: 60 + canvasWidth / 300,
@@ -83,6 +86,9 @@ export default {
     }, 500)
   },
   methods: {
+    saveAsImage() {
+      this.eventHub.$emit('saveAsImage')
+    },
     fetchFont(d) {
       var config = {
           kitId: 'lfl6jjo',

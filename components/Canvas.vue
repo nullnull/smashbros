@@ -46,19 +46,19 @@
         />
       </v-layer>
     </v-stage>
-    <!-- <button
-      class="uk-button uk-button-primary"
-      @click="saveAsImage">
-      画像を保存
-    </button> -->
   </div>
 </template>
 
 <script>
 import CharaImage from '~/assets/images/hime.png'
+import Vue from 'vue'
 
 export default {
   props: {
+    eventHub: {
+      required: true,
+      type: Vue
+    },
     width: {
       type: Number,
       required: true
@@ -109,6 +109,7 @@ export default {
       charaImage.onload = () => {
         this.charaImageUrl = charaImage
       }
+      this.eventHub.$on('saveAsImage', this.saveAsImage)
     }
   },
   methods: {
