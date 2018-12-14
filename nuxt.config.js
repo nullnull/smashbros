@@ -22,17 +22,18 @@ module.exports = {
   loading: { color: '#fff' },
 
   /*
-  ** Global CSS
-  */
-  css: [],
-
-  /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '@/plugins/mixin',
     { src: '@/plugins/uikit', ssr: false },
     { src: '@/plugins/konva', ssr: false }
   ],
+
+  /*
+  ** Global CSS
+  */
+  css: ['@/assets/styles/main.scss'],
 
   /*
   ** Nuxt.js modules

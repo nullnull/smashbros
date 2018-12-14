@@ -1,46 +1,72 @@
 <template lang="pug">
   #root
-    h1
+    h1.uk-padding.uk-text-center.uk-padding-remove-left.uk-padding-remove-right
       | スマブラ参戦風
       br
       | 画像ジェネレーター
 
-    .uk-margin
-      .uk-form-custom
-          input(type="file" @change="onFileChanged" accept="image/*" multiple)
-          button.uk-button.uk-button-default(type=button)
-            span(uk-icon="icon: cloud-upload")
-            | 画像を選択
+    .uk-flex.uk-flex-center
+      Canvas(
+        v-if="isCanvasVisible"
+        :width="canvasWidth"
+        :height="canvasHeight"
+        :background-image="backgroundImage"
+        :chara-image="image"
+        :name="name"
+        :size="parseFloat(size)"
+        :font-size="parseInt(fontSize)"
+        :event-hub="eventHub"
+      )
 
-    .uk-margin
-      label.uk-form-label(for="settings-name")
-        | 参戦者名
-      input#settings-name.uk-input(type="text" placeholder="(例) キングクルール" v-model="name")
-    .uk-margin
-      label.uk-form-label(for="settings-image-size")
-        | 画像サイズ
-      input#settings-image-size.uk-range(type="range" min="0" max="2" step="0.001" v-model="size")
-    .uk-margin
-      label.uk-form-label(for="settings-font-size")
-        | 文字サイズ
-      input#settings-font-size.uk-range(type="range" min="40" max="120" step="5" v-model="fontSize")
-
-    Canvas(
-      v-if="isCanvasVisible"
-      :width="canvasWidth"
-      :height="canvasHeight"
-      :background-image="backgroundImage"
-      :chara-image="image"
-      :name="name"
-      :size="parseFloat(size)"
-      :font-size="parseInt(fontSize)"
-    )
+    form.settings.uk-padding-small.uk-margin-top
+      .uk-grid.uk-grid-small(uk-grid)
+        .uk-form-custom.uk-text-center.uk-width-1-3
+            input(type="file" @change="onFileChanged" accept="image/*" multiple)
+            span.plus-circle(uk-icon="icon: plus-circle; ratio: 2.8")
+            br
+            label.uk-form-label
+              | 画像を選択
+        .uk-width-2-3
+          label.uk-form-label(for="settings-name")
+            | 参戦者名
+          input#settings-name.uk-input(type="text" placeholder="(例) キングクルール" v-model="name")
+        div.uk-margin-small-top
+        .uk-margin-small.uk-width-1-1
+          .uk-grid.uk-grid-small(uk-grid)
+            .uk-width-1-4
+              label.uk-form-label(for="settings-image-size")
+                | 画像サイズ
+            .uk-width-3-4
+              input#settings-image-size.uk-range(type="range" min="0" max="2" step="0.001" v-model="size")
+        .uk-margin-small.uk-width-1-1
+          .uk-grid.uk-grid-small(uk-grid)
+            .uk-width-1-4
+              label.uk-form-label(for="settings-font-size")
+                | 文字サイズ
+            .uk-width-3-4
+              input#settings-font-size.uk-range(type="range" min="40" max="120" step="5" v-model="fontSize")
+        .uk-width-1-1.uk-text-center
+          span.uk-button(@click="saveAsImage" uk-toggle="target: #modal")
+            span(uk-icon="icon: download; ratio: 1.5")
+            | 画像を保存
+    #modal.uk-flex-top(uk-modal)
+      .uk-modal-dialog.uk-margin-auto-vertical
+        button.uk-modal-close-default(type="button" uk-close)
+        img#output-image
+        p.modal-text.uk-text-center
+          | 生成完了！
+          br
+          template(v-if="isSp()")
+            | 長押しして保存してください
+          template(v-else)
+            | 画像を保存しました。
 </template>
 
 <script>
 import Canvas from '~/components/Canvas'
 import backgroundImage from '~/assets/images/sansen2.jpeg'
 import UIkit from 'uikit'
+import Vue from 'vue'
 
 export default {
   components: {
@@ -52,6 +78,7 @@ export default {
       backgroundImage: backgroundImage,
       canvasWidth: canvasWidth,
       canvasAspectRatio: 0.5661,
+      eventHub: new Vue(),
       name: '',
       size: 1,
       fontSize: 60 + canvasWidth / 300,
@@ -71,6 +98,9 @@ export default {
     }, 500)
   },
   methods: {
+    saveAsImage() {
+      this.eventHub.$emit('saveAsImage')
+    },
     fetchFont(d) {
       var config = {
           kitId: 'lfl6jjo',
@@ -124,8 +154,11 @@ export default {
 </script>
 
 <style>
-h1 {
-  color: #040404;
-  font-family: 'source-han-sans-japanese' !important;
+.modal-text {
+  color: #030303;
+}
+#root {
+  max-width: 600px;
+  margin: auto;
 }
 </style>
