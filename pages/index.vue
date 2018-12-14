@@ -29,7 +29,7 @@
         .uk-width-2-3
           label.uk-form-label(for="settings-name")
             | 参戦者名
-          input#settings-name.uk-input(type="text" placeholder="(例) キングクルール" v-model="name")
+          input#settings-name.uk-input(type="text" placeholder="キングクルール" v-model="name")
         div.uk-margin-small-top
         .uk-margin-small.uk-width-1-1
           .uk-grid.uk-grid-small(uk-grid)
