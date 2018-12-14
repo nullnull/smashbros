@@ -18,7 +18,9 @@
           }"
         />
       </v-layer>
-      <v-layer ref="layer">
+      <v-layer
+        v-if="charaImage != null"
+        ref="layer">
         <v-image
           :config="{
             draggable: true,
@@ -28,6 +30,7 @@
         />
       </v-layer>
       <v-layer
+        v-if="name != ''"
         ref="layer">
         <v-text
           :config="{
