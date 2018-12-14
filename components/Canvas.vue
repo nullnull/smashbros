@@ -5,8 +5,7 @@
       :config="{
         width: width,
         height: height,
-      }"
-      @click="saveAsImage">
+    }">
       <v-layer
         ref="layer"
       >
@@ -137,6 +136,18 @@ export default {
 </script>
 
 <style>
+#root {
+  width: 100%;
+}
+canvas {
+  height: calc(100vw * 0.5661) !important;
+  max-height: calc(600px * 0.5661) !important;
+}
+.konvajs-content {
+  width: 100% !important;
+  height: calc(100vw * 0.5661) !important;
+  max-height: calc(600px * 0.5661) !important;
+}
 #settings-name {
   margin-top: 4px;
 }

@@ -44,7 +44,7 @@
               label.uk-form-label(for="settings-font-size")
                 | 文字サイズ
             .uk-width-3-4
-              input#settings-font-size.uk-range(type="range" min="40" max="120" step="5" v-model="fontSize")
+              input#settings-font-size.uk-range(type="range" min="80" max="400" step="5" v-model="fontSize")
         .uk-width-1-1.uk-text-center
           span.uk-button(@click="saveAsImage" uk-toggle="target: #modal")
             span(uk-icon="icon: download; ratio: 1.5")
@@ -73,7 +73,8 @@ export default {
     Canvas
   },
   data() {
-    const canvasWidth = Math.min(600, window.innerWidth)
+    // const canvasWidth = Math.min(600, window.innerWidth)
+    const canvasWidth = 1200
     return {
       backgroundImage: backgroundImage,
       canvasWidth: canvasWidth,
@@ -81,7 +82,7 @@ export default {
       eventHub: new Vue(),
       name: '',
       size: 1,
-      fontSize: 60 + canvasWidth / 300,
+      fontSize: 140 + canvasWidth / 300,
       image: null,
       isCanvasVisible: false
     }
