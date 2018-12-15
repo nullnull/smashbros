@@ -54,6 +54,8 @@
         .uk-width-1-1.uk-text-center
           p.uk-text-small
             | 画像・文字はドラッグすると移動できます
+            br
+            | 挙動がおかしい場合は、再読み込みしてください
         .uk-width-1-1.uk-text-center
           span.uk-button(@click="saveAsImage" uk-toggle="target: #modal")
             span(uk-icon="icon: download; ratio: 1.5")
@@ -104,9 +106,9 @@ export default {
       eventHub: new Vue(),
       name: '',
       size: 1,
-      fontSize: this.isSp() ? 90 : 100,
+      fontSize: this.isSp() ? 60 : 100,
       fontSizeMin: this.isSp() ? 20 : 40,
-      fontSizeMax: this.isSp() ? 100 : 150,
+      fontSizeMax: this.isSp() ? 100 : 140,
       image: null,
       isCanvasVisible: false
     }
@@ -200,7 +202,7 @@ export default {
         img.onload = () => {
           this.size = Math.min(
             (this.canvasWidth * 0.7) / img.width,
-            this.canvasHeight / img.height
+            (this.canvasHeight * 0.7) / img.height
           )
           this.image = img
           return
