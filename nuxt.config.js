@@ -19,7 +19,7 @@ module.exports = {
       },
       {
         name: 'og:image',
-        content: 'https://katsumanarisawa.netlify.com/ogp.jpg'
+        content: 'https://smashbros-gen.netlify.com/ogp.jpg'
       },
       { name: 'twitter:card', content: 'summary_large_image' },
       { property: 'og:url', content: 'https://smashbros-gen.netlify.com/' },
