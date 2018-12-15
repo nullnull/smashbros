@@ -19,7 +19,6 @@
         />
       </v-layer>
       <v-layer
-        v-if="charaImage != null"
         ref="layerCharacter">
         <v-image
           ref="characterImage"
@@ -107,6 +106,8 @@ export default {
   watch: {
     backgroundImage(_a, _b) {
       this.loadBackgroundImage()
+    },
+    backgroundImageUrl(_a, _b) {
       this.playBackgroundAnimation()
     },
     charaImage(_a, _b) {

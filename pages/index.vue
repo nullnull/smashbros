@@ -50,7 +50,7 @@
               label.uk-form-label(for="settings-font-size")
                 | 文字サイズ
             .uk-width-3-4
-              input#settings-font-size.uk-range(type="range" min="40" max="300" step="5" v-model="fontSize")
+              input#settings-font-size.uk-range(type="range" :min="fontSizeMin" :max="fontSizeMax" step="5" v-model="fontSize")
         .uk-width-1-1.uk-text-center
           p.uk-text-small
             | 画像・文字はドラッグすると移動できます
@@ -104,7 +104,9 @@ export default {
       eventHub: new Vue(),
       name: '',
       size: 1,
-      fontSize: this.isSp() ? 90 : 140,
+      fontSize: this.isSp() ? 90 : 100,
+      fontSizeMin: this.isSp() ? 20 : 40,
+      fontSizeMax: this.isSp() ? 100 : 150,
       image: null,
       isCanvasVisible: false
     }
