@@ -10,6 +10,7 @@
         ref="layerBackground"
       >
         <v-image
+          ref="backgroundImage"
           :config="{
             image: backgroundImageUrl,
             width: width,
@@ -21,9 +22,11 @@
         v-if="charaImage != null"
         ref="layerCharacter">
         <v-image
+          ref="characterImage"
           :config="{
             draggable: true,
             image: charaImage,
+            opacity: 0,
             x: backgroundConfig.imageX,
             y: backgroundConfig.imageY,
             scale: { x: size, y : size }
@@ -98,13 +101,21 @@ export default {
   },
   data() {
     return {
-      charaImageUrl: null,
       backgroundImageUrl: null
     }
   },
   watch: {
     backgroundImage(_a, _b) {
       this.loadBackgroundImage()
+      this.playBackgroundAnimation()
+    },
+    charaImage(_a, _b) {
+      setTimeout(() => {
+        if (this.$refs.backgroundImage) this.playCharacterAnimation()
+      }, 40)
+      setTimeout(() => {
+        const node = this.$refs.characterImage.getNode().opacity(1)
+      }, 4000)
     }
   },
   mounted() {
@@ -114,6 +125,39 @@ export default {
     }
   },
   methods: {
+    playBackgroundAnimation() {
+      const duration = 100
+      const node = this.$refs.backgroundImage.getNode()
+      const anim = new Konva.Animation(function(frame) {
+        if (frame.time > duration) {
+          return
+        }
+        const rem = duration - frame.time
+        const scale = Math.sin(((rem / duration) * Math.PI) / 3) + 1
+        const opacity = -Math.sin(((rem / duration) * Math.PI) / 5) + 1
+        node.scale({ x: scale, y: scale })
+        node.opacity(opacity)
+      }, this.$refs.stage.getStage())
+      anim.start()
+      setTimeout(() => anim.stop(), duration * 2)
+    },
+    playCharacterAnimation() {
+      const duration = 100
+      const node = this.$refs.characterImage.getNode()
+      const originalScale = node.attrs.scaleX
+      const anim = new Konva.Animation(function(frame) {
+        if (frame.time > duration) {
+          return
+        }
+        const rem = duration - frame.time
+        const scale = Math.sin(((rem / duration) * Math.PI) / 3) + originalScale
+        const opacity = -Math.sin(((rem / duration) * Math.PI) / 10) + 1
+        node.scale({ x: scale, y: scale })
+        node.opacity(opacity)
+      }, this.$refs.stage.getStage())
+      anim.start()
+      setTimeout(() => anim.stop(), duration * 2)
+    },
     loadBackgroundImage() {
       const backgroundImage = new Image()
       backgroundImage.src = this.backgroundImage
