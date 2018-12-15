@@ -52,9 +52,13 @@
             .uk-width-3-4
               input#settings-font-size.uk-range(type="range" min="40" max="300" step="5" v-model="fontSize")
         .uk-width-1-1.uk-text-center
+          p.uk-text-small
+            | 画像・文字はドラッグすると移動できます
+        .uk-width-1-1.uk-text-center
           span.uk-button(@click="saveAsImage" uk-toggle="target: #modal")
             span(uk-icon="icon: download; ratio: 1.5")
             | 画像を保存
+
     #modal.uk-flex-top(uk-modal)
       .uk-modal-dialog.uk-margin-auto-vertical
         button.uk-modal-close-default(type="button" uk-close)
