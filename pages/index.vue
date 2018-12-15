@@ -58,10 +58,17 @@
           span.uk-button(@click="saveAsImage" uk-toggle="target: #modal")
             span(uk-icon="icon: download; ratio: 1.5")
             | 画像を保存
+        .uk-width-1-1.uk-margin-large-top.uk-text-center
+          hr.uk-divider-icon
         .uk-width-1-1.uk-text-center
           a(href="https://twitter.com/intent/tweet?button_hashtag=スマブラ参戦ジェネレーター&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false")
             | Tweet #LoveTwitter
           script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
+        .uk-width-1-1.uk-text-center.footer
+          p
+            | 素材提供 :
+            a(href="http://seiga.nicovideo.jp/seiga/im3183807")
+              | reaさん
 
     #modal.uk-flex-top(uk-modal)
       .uk-modal-dialog.uk-margin-auto-vertical
