@@ -1,7 +1,7 @@
 <template lang="pug">
   #root
     h1.uk-padding.uk-text-center.uk-padding-remove-left.uk-padding-remove-right
-      | スマブラ参戦
+      | #スマブラ参戦
       br
       | ジェネレーター
 
