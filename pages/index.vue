@@ -1,9 +1,9 @@
 <template lang="pug">
   #root
     h1.uk-padding.uk-text-center.uk-padding-remove-left.uk-padding-remove-right
-      | スマブラ参戦風
+      | スマブラ参戦
       br
-      | 画像ジェネレーター
+      | ジェネレーター
 
     .uk-flex.uk-flex-center
       Canvas(
@@ -58,6 +58,10 @@
           span.uk-button(@click="saveAsImage" uk-toggle="target: #modal")
             span(uk-icon="icon: download; ratio: 1.5")
             | 画像を保存
+        .uk-width-1-1.uk-text-center
+          a(href="https://twitter.com/intent/tweet?button_hashtag=スマブラ参戦ジェネレーター&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false")
+            | Tweet #LoveTwitter
+          script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
 
     #modal.uk-flex-top(uk-modal)
       .uk-modal-dialog.uk-margin-auto-vertical
