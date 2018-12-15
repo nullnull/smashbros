@@ -61,8 +61,8 @@
         .uk-width-1-1.uk-margin-large-top.uk-text-center
           hr.uk-divider-icon
         .uk-width-1-1.uk-text-center
-          a(href="https://twitter.com/intent/tweet?button_hashtag=スマブラ参戦ジェネレーター&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false")
-            | Tweet #LoveTwitter
+          a(href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false")
+            | Tweet
           script(async src="https://platform.twitter.com/widgets.js" charset="utf-8")
         .uk-width-1-1.uk-text-center.footer
           p

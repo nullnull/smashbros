@@ -7,7 +7,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'スマブラ参戦ジェネレーター2018',
+    title: '#スマブラ参戦ジェネレーター',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -23,7 +23,7 @@ module.exports = {
       },
       { name: 'twitter:card', content: 'summary_large_image' },
       { property: 'og:url', content: 'https://smashbros-gen.netlify.com/' },
-      { property: 'og:title', content: 'スマブラ参戦ジェネレーター2018' },
+      { property: 'og:title', content: '#スマブラ参戦ジェネレーター' },
       {
         property: 'og:description',
         content:
