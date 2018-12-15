@@ -10,7 +10,8 @@
         v-if="isCanvasVisible"
         :width="canvasWidth"
         :height="canvasHeight"
-        :background-image="backgroundImage"
+        :background-config="backgroundConfig"
+        :background-image="backgroundConfig.image"
         :chara-image="image"
         :name="name"
         :size="parseFloat(size)"
@@ -19,14 +20,19 @@
       )
 
     form.settings.uk-padding-small.uk-margin-top
-      .uk-grid.uk-grid-small(uk-grid)
-        .uk-form-custom.uk-text-center.uk-width-1-3
+      .uk-grid(uk-grid)
+        .uk-form-custom.uk-text-center.uk-width-1-5
             input(type="file" @change="onFileChanged" accept="image/*" multiple)
             span.plus-circle(uk-icon="icon: plus-circle; ratio: 2.8")
             br
             label.uk-form-label
-              | 画像を選択
-        .uk-width-2-3
+              | 画像選択
+        .uk-text-center.uk-width-1-5(@click="toggleBackground")
+            span.refresh(uk-icon="icon: refresh; ratio: 2.8")
+            br
+            label.uk-form-label
+              | 背景切替
+        .uk-width-3-5
           label.uk-form-label(for="settings-name")
             | 参戦者名
           input#settings-name.uk-input(type="text" placeholder="キングクルール" v-model="name")
@@ -64,7 +70,9 @@
 
 <script>
 import Canvas from '~/components/Canvas'
-import backgroundImage from '~/assets/images/sansen2.jpeg'
+import backgroundImage1 from '~/assets/images/background1.jpg'
+import backgroundImage2 from '~/assets/images/background2.jpg'
+import backgroundImage3 from '~/assets/images/background3.jpg'
 import UIkit from 'uikit'
 import Vue from 'vue'
 
@@ -75,7 +83,7 @@ export default {
   data() {
     const canvasWidth = Math.min(600, window.innerWidth)
     return {
-      backgroundImage: backgroundImage,
+      backgroundIdx: 0,
       canvasWidth: canvasWidth,
       canvasAspectRatio: 0.5661,
       eventHub: new Vue(),
@@ -87,6 +95,37 @@ export default {
     }
   },
   computed: {
+    backgroundConfigs() {
+      return [
+        {
+          textRotation: 11,
+          textX: this.canvasWidth / 2,
+          textY: this.canvasHeight / 5,
+          imageX: this.canvasWidth / 10,
+          imageY: this.canvasHeight / 30,
+          image: backgroundImage1
+        },
+        {
+          textRotation: 4,
+          textX: this.canvasWidth / 10,
+          textY: this.canvasHeight / 30,
+          imageX: this.canvasWidth / 1.7,
+          imageY: this.canvasHeight / 30,
+          image: backgroundImage2
+        },
+        {
+          textRotation: 4,
+          textX: this.canvasWidth / 10,
+          textY: this.canvasHeight / 30,
+          imageX: this.canvasWidth / 1.8,
+          imageY: this.canvasHeight / 30,
+          image: backgroundImage3
+        }
+      ]
+    },
+    backgroundConfig() {
+      return this.backgroundConfigs[this.backgroundIdx]
+    },
     canvasHeight() {
       return this.canvasWidth * this.canvasAspectRatio
     }
@@ -98,6 +137,9 @@ export default {
     }, 500)
   },
   methods: {
+    toggleBackground() {
+      this.backgroundIdx = (this.backgroundIdx + 1) % 3
+    },
     saveAsImage() {
       this.eventHub.$emit('saveAsImage')
     },

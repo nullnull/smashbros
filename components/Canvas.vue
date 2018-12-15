@@ -7,7 +7,7 @@
         height: height,
     }">
       <v-layer
-        ref="layer"
+        ref="layerBackground"
       >
         <v-image
           :config="{
@@ -19,30 +19,32 @@
       </v-layer>
       <v-layer
         v-if="charaImage != null"
-        ref="layer">
+        ref="layerCharacter">
         <v-image
           :config="{
             draggable: true,
             image: charaImage,
+            x: backgroundConfig.imageX,
+            y: backgroundConfig.imageY,
             scale: { x: size, y : size }
           }"
         />
       </v-layer>
       <v-layer
         v-if="name != ''"
-        ref="layer">
+        ref="layerText">
         <v-text
           :config="{
             text: name,
             fontSize: fontSize,
             fontFamily: 'source-han-sans-japanese',
             fontWeight: 900,
-            x: width / 3,
-            y: height / 30,
+            x: backgroundConfig.textX,
+            y: backgroundConfig.textY,
             draggable: true,
             stroke: '#050505',
             strokeWidth: 4,
-            rotation: 11,
+            rotation: backgroundConfig.textRotation,
             fill: '#E2E2E2'
           }"
         />
@@ -66,6 +68,10 @@ export default {
     },
     height: {
       type: Number,
+      required: true
+    },
+    backgroundConfig: {
+      type: Object,
       required: true
     },
     backgroundImage: {
@@ -96,19 +102,26 @@ export default {
       backgroundImageUrl: null
     }
   },
+  watch: {
+    backgroundImage(_a, _b) {
+      this.loadBackgroundImage()
+    }
+  },
   mounted() {
     if (process.browser) {
+      this.eventHub.$on('saveAsImage', this.saveAsImage)
+      this.loadBackgroundImage()
+    }
+  },
+  methods: {
+    loadBackgroundImage() {
       const backgroundImage = new Image()
       backgroundImage.src = this.backgroundImage
       backgroundImage.onload = () => {
         // set image only when it is loaded
         this.backgroundImageUrl = backgroundImage
       }
-
-      this.eventHub.$on('saveAsImage', this.saveAsImage)
-    }
-  },
-  methods: {
+    },
     resizeCanvas(scale) {
       const stage = this.$refs.stage.getStage()
       stage.width(this.width * scale)
