@@ -7,11 +7,28 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'スマブラ参戦ジェネレーター2018',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'スマブラ参戦風画像を生成するジェネレーターです。画像をドラッグして位置を調整できます。'
+      },
+      {
+        name: 'og:image',
+        content: 'https://katsumanarisawa.netlify.com/ogp.jpg'
+      },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { property: 'og:url', content: 'https://smashbros-gen.netlify.com/' },
+      { property: 'og:title', content: 'スマブラ参戦ジェネレーター2018' },
+      {
+        property: 'og:description',
+        content:
+          'スマブラ参戦風画像を生成するジェネレーターです。画像をドラッグして位置を調整できます。'
+      }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
