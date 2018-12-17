@@ -1,6 +1,9 @@
-# smashbros
+# smashbros-gen
+> An Image Generator for image like smashbros ultimate
 
-> A Generator for logo images of smashbros sp
+https://smashbros-gen.netlify.com/
+
+[![Image from Gyazo](https://i.gyazo.com/591a8eec761e464fb062ccf2336a9e0b.png)](https://gyazo.com/591a8eec761e464fb062ccf2336a9e0b)
 
 ## Build Setup
 
